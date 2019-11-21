@@ -1,4 +1,4 @@
-# reddit_notifications
+# Reddit Post Notification Sender
 Grab posts from reddit and send notifications (possibly through SMS) if the search criteria is met.
 
 **Instructions**
