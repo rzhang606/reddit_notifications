@@ -7,15 +7,15 @@ with open('script/authorization.json', 'r') as auth_file:
 
 reddit = praw.Reddit(client_id = data['client_id'],
                     client_secret = data['client_secret'],
-                    user_agent = data['user_agent'],
-                    username = data['username'],
-                    password = data['password'])
+                    user_agent = data['user_agent'])
 
-subreddit = reddit.subreddit('subreddit here')
+subreddit = reddit.subreddit(data['subreddit'])
 
-top_subreddit = subreddit.top(limit=20)
+new_post_titles = list()
 
-for post in top_subreddit:
-    print(post.title)
+for title in data['titles']:
+    for post in subreddit.search('[DISC] ' + title, sort='new', time_filter='day', limit=10):
+        new_post_titles.append(post)
 
-
+for i in new_post_titles:
+    print(i.title)

@@ -3,10 +3,19 @@ Grab posts from reddit and send notifications (possibly through SMS) if the sear
 
 **Instructions**
 
-1. Add your information (from your reddit account) to the authorization.json
+Prerequisites: Sign up as a developer to be able to use the reddit api. Create an application for the client id and secret.
 
-2. Run 'docker build -t [name reference here] .
+1. Create a authorization.json file under `script/`
 
-3. Run 'docker run [name reference]'
+2. Add your information (from your reddit account) to the authorization.json. The Fields are ... 
+    - client_id
+    - client_secret
+    - user_agent
 
-4. Thats it
+3. (Optional) I included subreddit name and search terms in the json file as well to keep all the data in one place
+
+4. Run 'docker build -t [name reference here] .
+
+5. Run 'docker run [name reference]'
+
+6. Thats it
