@@ -1,6 +1,11 @@
 import praw
 import json
+import os
 from twilio.rest import Client
+from twilio.http.http_client import TwilioHttpClient
+
+proxy_client = TwilioHttpClient()
+proxy_client.session.proxies = {'https':os.environ['https_proxy']}
 
 with open('script/authorization.json', 'r') as auth_file:
     data = json.load(auth_file)
@@ -25,7 +30,7 @@ if new_post_titles != list():
     account_sid = data['twilio_sid']
     auth_token = data['twilio_auth_token']
 
-    client = Client(account_sid, auth_token)
+    client = Client(account_sid, auth_token, http_client=proxy_client)
 
     message = client.messages \
         .create(
