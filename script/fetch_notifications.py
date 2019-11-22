@@ -16,7 +16,7 @@ new_post_titles = list()
 
 for title in data['titles']:
     for post in subreddit.search('[DISC] ' + title, sort='new', time_filter='day', limit=10):
-        new_post_titles.append(post)
+        new_post_titles.append(post.title)
 
 
 #Send SMS message
@@ -29,7 +29,7 @@ if new_post_titles != list():
 
     message = client.messages \
         .create(
-            body=data['message'], #message here
+            body=data['message'] + ' - ' + ", ".join(new_post_titles), #message here
             from_=data['twilio_number'], #twilio phone number - ex. +12223334444
             to=data['receiver_number'] #your phone number
         )
