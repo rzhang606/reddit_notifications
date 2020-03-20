@@ -6,4 +6,4 @@ WORKDIR /
 
 RUN pip install -r requirements.txt
 
-CMD ["python", "./script/fetch_notifications.py"]
+CMD ["python", "./script/main.py"]

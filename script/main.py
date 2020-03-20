@@ -11,10 +11,10 @@ def send_notifs(request):
 
     print("Started running send_notifs ... ")
 
-    proxy_client = TwilioHttpClient()
-    proxy_client.session.proxies = {'https':os.environ['https_proxy']}
+    #proxy_client = TwilioHttpClient()
+    #proxy_client.session.proxies = {'https':os.environ['https_proxy']}
 
-    with open('/home/rzhang606/reddit_notifications/script/authorization.json', 'r') as auth_file:
+    with open('./authorization.json', 'r') as auth_file:
         data = json.load(auth_file)
 
 
@@ -41,7 +41,8 @@ def send_notifs(request):
         account_sid = data['twilio_sid']
         auth_token = data['twilio_auth_token']
 
-        client = Client(account_sid, auth_token, http_client=proxy_client)
+        #client = Client(account_sid, auth_token, http_client=proxy_client)
+        client = Client(account_sid, auth_token)
 
         message = client.messages \
             .create(
