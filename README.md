@@ -1,5 +1,5 @@
 # Reddit Post Notification Sender
-Grab posts from reddit and send notifications (possibly through SMS) if the search criteria is met.
+Grab posts from reddit and send notifications if the search criteria is met.
 
 **Instructions (Local running)**
 
@@ -24,10 +24,14 @@ Prerequisites: Sign up as a developer to be able to use the reddit api. Create a
 
 **GCP Instructions** 
 
-1. Create a zip file with your auth file, main.py, and requirements
+1. Create a zip file with your auth file, main.py, and requirements ( on mac, run "zip [filename] *" inside the script folder)
 
 2. Upload it under a google cloud bucket
 
 3. Create a google cloud function, using the zip file as the source. Test the function after it builds, to see if it works
 
 4. Use google cloud scheduler to schedule the task as often as you would like
+
+Troubleshooting:
+
+If the scheduler returns with a permissions error, create a new service role with both cloud function invoking and cloud scheduler admin priviledges and assign it to both resources.
