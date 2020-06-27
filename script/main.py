@@ -4,8 +4,6 @@ import os
 from twilio.rest import Client
 from twilio.http.http_client import TwilioHttpClient
 
-def main():
-    send_notifs()
 
 def send_notifs(request):
 
@@ -32,21 +30,32 @@ def send_notifs(request):
         for post in subreddit.search('[DISC] ' + title, sort='new', time_filter='day', limit=10):
             new_post_titles.append(post.title)
 
-    print("Reddit posts found/not found ...")
+    print("Reddit posts found/not found ...") #logging msg
+
+    #Fetch twilio credentials
+    account_sid = data['twilio_sid']
+    auth_token = data['twilio_auth_token']
+    #create client using creds
+    client = Client(account_sid, auth_token)
 
 
     #Send SMS message
     if new_post_titles != list():
 
-        account_sid = data['twilio_sid']
-        auth_token = data['twilio_auth_token']
-
-        #client = Client(account_sid, auth_token, http_client=proxy_client)
-        client = Client(account_sid, auth_token)
-
         message = client.messages \
             .create(
                 body=data['message'] + ' - ' + ", ".join(new_post_titles), #message here
+                from_=data['twilio_number'], #twilio phone number - ex. +12223334444
+                to=data['receiver_number'] #your phone number
+            )
+
+        print("Sending SMS")
+
+        print(message.sid)
+    else:
+        message = client.messages \
+            .create(
+                body="No new chapters yesterday", #message here
                 from_=data['twilio_number'], #twilio phone number - ex. +12223334444
                 to=data['receiver_number'] #your phone number
             )

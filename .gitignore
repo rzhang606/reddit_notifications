@@ -5,4 +5,4 @@ script/reddit_notifs_src.zip
 terraform/reddit-notifs-tf-creds.json
 terraform/terraform.tfstate
 terraform/terraform.tfstate.backup
-terraform/.terraform
+terraform/.*

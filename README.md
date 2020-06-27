@@ -1,7 +1,7 @@
 # Reddit Post Notification Sender
 Grab posts from reddit and send notifications if the search criteria is met.
 
-**Instructions (Local running)**
+**Instructions (Run Locally)**
 
 Prerequisites: Sign up as a developer to be able to use the reddit api. Create an application for the client id and secret.
 
@@ -12,7 +12,7 @@ Prerequisites: Sign up as a developer to be able to use the reddit api. Create a
     - client_secret
     - user_agent
 
-3. (Optional) I included subreddit name and search terms in the json file as well to keep all the data in one place
+3. (Optional) I included subreddit name, search terms, twilio credentials in the json file as well to keep all the data in one place
 
 4. Run 'docker build -t [name reference here] .
    Notice the period above ^
@@ -24,14 +24,8 @@ Prerequisites: Sign up as a developer to be able to use the reddit api. Create a
 
 **GCP Instructions** 
 
-1. Create a zip file with your auth file, main.py, and requirements ( on mac, run "zip [filename] *" inside the script folder)
-
-2. Upload it under a google cloud bucket
-
-3. Create a google cloud function, using the zip file as the source. Test the function after it builds, to see if it works
-
-4. Use google cloud scheduler to schedule the task as often as you would like
-
-Troubleshooting:
-
-If the scheduler returns with a permissions error, create a new service role with both cloud function invoking and cloud scheduler admin priviledges and assign it to both resources.
+1. Prereqs
+    - set up authorization.json file under scripts directory (depends on reddit api, twilio api)
+    - get your gcp json credentials file under terraform directory
+2. Run the launch bash script (root directory)
+    - There seems to be an issue with the cloud function not updating source code after the bucket is updated, so it deletes all resources before applying for every run. If this behavior is undesireable, apply terraform manually.
