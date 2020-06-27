@@ -1,6 +1,9 @@
 # Reddit Post Notification Sender
 Grab posts from reddit and send notifications (possibly through SMS) if the search criteria is met.
 
+**Running on Google Cloud**
+Check the googlecloud branch
+
 **Instructions**
 
 Prerequisites: Sign up as a developer to be able to use the reddit api. Create an application for the client id and secret.
