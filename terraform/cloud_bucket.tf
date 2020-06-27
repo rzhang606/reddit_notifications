@@ -27,3 +27,20 @@ resource "google_cloudfunctions_function" "function" {
   entry_point           = "send_notifs"
   service_account_email = "functionrunner@reddit-notifications.iam.gserviceaccount.com"
 }
+
+#Cloud Scheduler Job
+resource "google_cloud_scheduler_job" "job" {
+  name             = "cloud-function-runner"
+  description      = "Runs a cloud function using HTTP target"
+  schedule         = "0 8 * * *"
+  time_zone        = "America/Los_Angeles"
+
+  http_target {
+    http_method = "POST"
+    uri         = google_cloudfunctions_function.function.https_trigger_url
+
+    oidc_token {
+      service_account_email = "functionrunner@reddit-notifications.iam.gserviceaccount.com"
+    }
+  }
+}
