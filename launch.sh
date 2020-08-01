@@ -20,3 +20,6 @@ fi
 
 #apply
 terraform apply -auto-approve
+
+# clean up
+rm -rf /script/reddit_notifs_src.zip
