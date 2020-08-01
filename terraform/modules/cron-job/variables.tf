@@ -1,12 +1,12 @@
 #Bucket
 variable "bucket_name" {
-    default = "pythonscripts"
+    default = "mybucket"
     type = string
 }
 
 #Bucket Object
 variable "bucket_object_name" {
-    default = "reddit_script"
+    default = "myobject"
     type = string
 }
 
